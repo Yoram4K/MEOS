@@ -31,10 +31,11 @@ Gebaseerd op de publiek bekende onderdelen van MEOS:
 ## Techstack
 
 - React 19 + TypeScript
-- React Router (client-side navigatie, mobile-first "device frame")
+- React Router (`HashRouter`, zodat routes ook werken op statische hosting zoals GitHub Pages)
 - Tailwind CSS v4
+- `vite-plugin-pwa` (installeerbaar als app op een telefoon)
 
-## Starten
+## Starten (lokaal)
 
 ```bash
 npm install
@@ -44,9 +45,57 @@ npm run dev
 Open de URL die Vite toont (standaard `http://localhost:5173`). Log in met
 een willekeurig dienstnummer en wachtwoord.
 
+> De inlogsessie staat alleen in het geheugen van de pagina. Na een harde
+> herlaad (of het opnieuw openen van de app) moet je opnieuw inloggen — dat
+> is bewust, net als bij een echte werk-app.
+
 ## Build
 
 ```bash
 npm run build
 npm run preview
 ```
+
+## Live zetten op GitHub Pages
+
+1. Ga in de GitHub-repo naar **Settings → Pages** en zet **Source** op
+   **GitHub Actions** (eenmalig).
+2. Push naar de `main`-branch (of draai de workflow handmatig via
+   **Actions → Deploy naar GitHub Pages → Run workflow**).
+3. De workflow (`.github/workflows/deploy.yml`) bouwt de app en publiceert
+   hem automatisch op:
+
+   ```
+   https://<jouw-github-gebruikersnaam>.github.io/MEOS/
+   ```
+
+   (Voor deze repo dus normaal gesproken `https://yoram4k.github.io/MEOS/`.)
+
+Elke volgende push naar `main` deployt automatisch een nieuwe versie.
+
+> Verhuis je de site naar een andere repo-naam of een custom domain? Pas
+> dan `base` in `vite.config.ts` en `start_url`/`scope` in het
+> `manifest`-blok aan.
+
+## Als "app" op je telefoon zetten
+
+De app is een PWA (Progressive Web App): geen appstore nodig, gewoon de
+GitHub Pages-link openen en installeren.
+
+**Android (Chrome):**
+1. Open de GitHub Pages-link.
+2. Tik op het menu (⋮) → **App installeren** (of Chrome toont vanzelf een
+   installbanner).
+3. Het icoon verschijnt op je startscherm en opent in een los
+   app-venster, zonder browserbalk.
+
+**iPhone/iPad (Safari):**
+1. Open de GitHub Pages-link in **Safari** (moet Safari zijn, geen Chrome).
+2. Tik op het deel-icoon (vierkant met pijl omhoog).
+3. Kies **Zet op beginscherm**.
+4. Het MEOS-icoon verschijnt op je beginscherm en opent als
+   full-screen app.
+
+iOS ondersteunt geen automatische installbanner zoals Android — dat
+"Zet op beginscherm" is daar de standaard manier om een PWA als app te
+gebruiken.
