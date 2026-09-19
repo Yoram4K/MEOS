@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+@theme {
+  --color-meos-950: #05142b;
+  --color-meos-900: #0a2044;
+  --color-meos-800: #0f2f5f;
+  --color-meos-700: #163f7a;
+  --color-meos-600: #1e4f96;
+  --color-meos-500: #2c65b8;
+  --color-meos-400: #4c85d6;
+  --color-meos-100: #dce7f7;
+  --color-meos-50: #f2f6fc;
+
+  --color-signal-500: #d7263d;
+  --color-signal-100: #fbe0e3;
+  --color-warn-500: #d98c00;
+  --color-warn-100: #fbeacc;
+  --color-ok-500: #1f8a4c;
+  --color-ok-100: #dcf1e4;
+
+  --font-sans: "Inter", system-ui, "Segoe UI", Roboto, sans-serif;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-meos-50);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Mimic a physical device viewport on desktop, full-bleed on mobile */
+.device-frame {
+  max-width: 430px;
+  margin: 0 auto;
+  min-height: 100dvh;
+  background: #fff;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 0 1px rgba(10, 32, 68, 0.06);
+}
+
+@media (min-width: 431px) {
+  .device-frame {
+    min-height: 100dvh;
+    box-shadow: 0 20px 60px -20px rgba(10, 32, 68, 0.35);
+  }
+  body {
+    padding: 24px 0;
+  }
+}
+
+::selection {
+  background: var(--color-meos-200, #cfe0f7);
+}
+
+input:focus,
+button:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid var(--color-meos-500);
+  outline-offset: 1px;
+}
